@@ -310,9 +310,15 @@
                 </h3>
                 <div class="resource-grid">
                     @forelse($publicLinks as $link)
-                        <a href="{{ $link->url }}" target="_blank" class="resource-tile">
-                            <i class="bi bi-link-45deg fs-4 text-primary"></i>
-                            <span class="text-truncate fw-medium">{{ $link->title }}</span>
+                        <a href="{{ $link->url }}" target="_blank" class="resource-tile p-2 pe-3">
+                            @if($link->cover_image)
+                                <img src="{{ asset('storage/' . $link->cover_image) }}" alt="{{ $link->title }}" class="rounded shadow-sm" style="width: 45px; height: 45px; object-fit: cover;">
+                            @else
+                                <div class="rounded bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                                    <i class="bi bi-link-45deg fs-4 text-primary"></i>
+                                </div>
+                            @endif
+                            <span class="text-truncate fw-medium ms-1">{{ $link->title }}</span>
                         </a>
                     @empty
                         <div class="text-muted small fst-italic">No public links available.</div>
