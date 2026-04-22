@@ -19,6 +19,6 @@ class IsUser
             return $next($request);
         }
 
-        return redirect('/')->with('error', 'Unauthorized access');
+        return redirect()->route('login')->with('error', 'Unauthorized access');
     }
 }

@@ -15,7 +15,19 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\IsAdmin::class,
             'user' => \App\Http\Middleware\IsUser::class,
         ]);
+
+        $middleware->redirectTo(
+            guests: '/login',
+            users: function () {
+                if (auth()->check()) {
+                    return auth()->user()->role === 'admin' ? route('admin.dashboard') : route('user.dashboard');
+                }
+                return route('login');
+            }
+        );
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->render(function (\Illuminate\Http\Exceptions\PostTooLargeException $e, $request) {
+            return back()->with('error', 'Ukuran file terlalu besar! Silakan unggah file yang lebih kecil atau hubungi admin.');
+        });
     })->create();

@@ -19,7 +19,7 @@
             <!-- Video Player Card -->
             <div class="card border-0 shadow-lg rounded-4 overflow-hidden mb-4 bg-black">
                 <div class="ratio ratio-16x9">
-                    @if($video->video_source === 'youtube' && $video->youtube_id)
+                    @if($video->youtube_id)
                         <iframe 
                             src="https://www.youtube.com/embed/{{ $video->youtube_id }}?rel=0&showinfo=0&autoplay=1" 
                             title="{{ $video->title }}" 
@@ -90,7 +90,7 @@
                     @if($otherVideos->count() > 0)
                         <div class="list-group list-group-flush">
                             @foreach($otherVideos as $otherVideo)
-                                <a href="{{ route('user.videos.play', $otherVideo) }}" class="list-group-item list-group-item-action py-3 px-4 border-0 hover-bg-light transition">
+                                <a href="{{ route('videos.play', $otherVideo) }}" class="list-group-item list-group-item-action py-3 px-4 border-0 hover-bg-light transition">
                                     <div class="d-flex gap-3">
                                         <div class="position-relative flex-shrink-0">
                                             @if($otherVideo->thumbnail)

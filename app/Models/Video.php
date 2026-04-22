@@ -27,12 +27,17 @@ class Video extends Model
      */
     public function getYoutubeIdAttribute()
     {
-        if ($this->video_source !== 'youtube' || !$this->external_url) {
+        if (!$this->external_url) {
             return null;
         }
 
-        preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v=|v\/|embed\/|shorts\/))([\w-]{11})(?:[\?&].*)?$/", $this->external_url, $matches);
+        // Support various YouTube URL formats
+        $pattern = '/^(?:https?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v=|v\/|embed\/|shorts\/))([\w-]{11})(?:[\?&].*)?$/i';
         
-        return $matches[1] ?? null;
+        if (preg_match($pattern, $this->external_url, $matches)) {
+            return $matches[1];
+        }
+
+        return null;
     }
 }

@@ -33,7 +33,7 @@ Route::post('/login', function () {
 
     if (Auth::attempt($credentials, request('remember'))) {
         request()->session()->regenerate();
-        return redirect()->intended(auth()->user()->role === 'admin' ? '/admin/dashboard' : '/user/dashboard');
+        return redirect()->intended(auth()->user()->role === 'admin' ? route('admin.dashboard') : route('user.dashboard'));
     }
 
     return back()->withErrors([
@@ -60,14 +60,14 @@ Route::post('/register', function () {
     ]);
 
     Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']]);
-    return redirect('/user/dashboard');
+    return redirect()->route('user.dashboard');
 })->middleware('guest')->name('register.post');
 
 Route::post('/logout', function () {
     Auth::logout();
     request()->session()->invalidate();
     request()->session()->regenerateToken();
-    return redirect('/');
+    return redirect()->route('login');
 })->middleware('auth')->name('logout');
 
 // Authenticated Routes
@@ -103,6 +103,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/videos/category/{category}', [UserVideoController::class, 'show'])->name('videos.show');
     });
 
-    // Public/Guest allowed Play Route (Handled in Controller)
-    Route::get('/videos/{video}/play', [UserVideoController::class, 'play'])->name('videos.play');
 });
+
+// Public/Guest allowed Play Route (Handled in Controller)
+Route::get('/videos/{video}/play', [UserVideoController::class, 'play'])->name('videos.play');
+

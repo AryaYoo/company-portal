@@ -153,6 +153,42 @@
         
         // Initial state
         toggleSections();
+
+        // File size validation
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(e) {
+            const videoFile = document.getElementById('video_file');
+            const thumbnail = document.getElementById('thumbnail');
+            
+            // Check video file size (100MB max)
+            if (sourceUpload.checked && videoFile.files.length > 0) {
+                const fileSize = videoFile.files[0].size / 1024 / 1024; // in MB
+                if (fileSize > 120) { // Limit set slightly higher than php.ini for safety buffer
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'File Terlalu Besar!',
+                        text: `Ukuran video Anda (${fileSize.toFixed(2)} MB) melebihi batas maksimal 100 MB. Silakan gunakan link YouTube atau perkecil ukuran video.`,
+                        confirmButtonColor: '#556b2f'
+                    });
+                    return;
+                }
+            }
+
+            // Check thumbnail size (2MB max)
+            if (thumbnail.files.length > 0) {
+                const thumbSize = thumbnail.files[0].size / 1024 / 1024;
+                if (thumbSize > 2) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Thumbnail Terlalu Besar!',
+                        text: `Ukuran gambar (${thumbSize.toFixed(2)} MB) melebihi batas maksimal 2 MB.`,
+                        confirmButtonColor: '#556b2f'
+                    });
+                }
+            }
+        });
     });
 </script>
 @endpush

@@ -4,6 +4,7 @@
     </IfModule>
 
     RewriteEngine On
+    RewriteBase /portalrsiaibi/public/
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
@@ -23,3 +24,8 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# Increase PHP upload limits
+php_value upload_max_filesize 128M
+php_value post_max_size 128M
+php_value memory_limit 256M

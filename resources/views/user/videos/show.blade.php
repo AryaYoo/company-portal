@@ -34,7 +34,7 @@
                                 </div>
                             @endif
                             <div class="overlay d-flex align-items-center justify-content-center">
-                                <a href="{{ route('user.videos.play', $video) }}" class="btn btn-danger rounded-circle shadow p-3 play-btn-main">
+                                <a href="{{ route('videos.play', $video) }}" class="btn btn-danger rounded-circle shadow p-3 play-btn-main">
                                     <i class="bi bi-play-fill fs-3 text-white"></i>
                                 </a>
                             </div>
@@ -52,7 +52,7 @@
                                 {{ $video->description ? Str::limit($video->description, 90) : 'No description provided.' }}
                             </p>
                             <div class="d-grid mt-3">
-                                <a href="{{ route('user.videos.play', $video) }}" class="btn btn-outline-danger rounded-pill">
+                                <a href="{{ route('videos.play', $video) }}" class="btn btn-outline-danger rounded-pill">
                                     Watch Tutorial
                                 </a>
                             </div>

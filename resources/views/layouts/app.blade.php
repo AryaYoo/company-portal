@@ -225,17 +225,20 @@
             @endif
 
             @if(session('error'))
-                Toast.fire({
+                Swal.fire({
                     icon: 'error',
-                    title: '{{ session('error') }}'
+                    title: 'Oops!',
+                    text: '{{ session('error') }}',
+                    confirmButtonColor: '#556b2f',
                 });
             @endif
 
             @if($errors->any() && !request()->routeIs('login') && !request()->routeIs('register'))
-                Toast.fire({
-                    icon: 'warning',
+                Swal.fire({
+                    icon: 'error',
                     title: 'Terjadi Kesalahan!',
-                    text: 'Mohon periksa kembali inputan Anda.'
+                    html: '<ul class="text-start">@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+                    confirmButtonColor: '#556b2f',
                 });
             @endif
 

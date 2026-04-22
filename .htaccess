@@ -1,24 +1,27 @@
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
-
     RewriteEngine On
+    RewriteBase /portalrsiaibi/
 
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-
-    # Redirect Trailing Slashes If Not A Folder...
+    # Prevent loop if already in public/
+    RewriteCond %{REQUEST_URI} !^/public/
+    
+    # Optional: Redirect trailing slashes
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
 
-    # Handle Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+    # 1. Bypass symlink for storage folder on network drive
+    # If the URL starts with /storage, rewrite to the physical storage folder
+    RewriteCond %{REQUEST_URI} !^/portalrsiaibi/storage/app/public/
+    RewriteRule ^storage/(.*)$ storage/app/public/$1 [L]
 
-    # Mask the public directory
+    # 2. Rewrite all OTHER requests to public/ folder
+    # But ONLY if it's not already pointing to storage/app/public or already inside public/
+    RewriteCond %{REQUEST_URI} !^/portalrsiaibi/storage/app/public/
+    RewriteCond %{REQUEST_URI} !^/portalrsiaibi/public/
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
+
+# Increase PHP upload limits
+php_value upload_max_filesize 128M
+php_value post_max_size 128M
+php_value memory_limit 256M
