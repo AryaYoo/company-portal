@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Masuk - RSIA IBI</title>
+    <!-- Favicon -->
+    @php
+        $portalFavicon = \App\Models\Setting::get('portal_favicon');
+    @endphp
+    @if($portalFavicon)
+        <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $portalFavicon) }}">
+    @endif
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">

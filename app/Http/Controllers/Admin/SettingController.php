@@ -13,8 +13,9 @@ class SettingController extends Controller
     {
         $loginWallpaper = Setting::get('login_wallpaper');
         $portalLogo = Setting::get('portal_logo');
+        $portalFavicon = Setting::get('portal_favicon');
         $portalName = Setting::get('portal_name', 'Portal RSIA IBI');
-        return view('admin.settings.index', compact('loginWallpaper', 'portalLogo', 'portalName'));
+        return view('admin.settings.index', compact('loginWallpaper', 'portalLogo', 'portalFavicon', 'portalName'));
     }
 
     public function update(Request $request)
@@ -22,6 +23,7 @@ class SettingController extends Controller
         $request->validate([
             'login_wallpaper' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
             'portal_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'portal_favicon' => 'nullable|image|mimes:png,ico,jpg,jpeg|max:512',
             'portal_name' => 'nullable|string|max:255',
         ]);
 
@@ -45,6 +47,15 @@ class SettingController extends Controller
             }
             $path = $request->file('portal_logo')->store('settings', 'public');
             Setting::set('portal_logo', $path);
+        }
+
+        if ($request->hasFile('portal_favicon')) {
+            $oldPath = Setting::get('portal_favicon');
+            if ($oldPath && Storage::disk('public')->exists($oldPath)) {
+                Storage::disk('public')->delete($oldPath);
+            }
+            $path = $request->file('portal_favicon')->store('settings', 'public');
+            Setting::set('portal_favicon', $path);
         }
 
         return redirect()->back()->with('success', 'Pengaturan berhasil diperbarui');

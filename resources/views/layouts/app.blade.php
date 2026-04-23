@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - Company Portal</title>
+    <!-- Favicon -->
+    @php
+        $portalFavicon = \App\Models\Setting::get('portal_favicon');
+    @endphp
+    @if($portalFavicon)
+        <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $portalFavicon) }}">
+    @endif
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

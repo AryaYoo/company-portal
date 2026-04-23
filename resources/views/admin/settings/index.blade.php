@@ -54,6 +54,28 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row align-items-center mt-4">
+                                <div class="col-md-6 mb-4 mb-md-0">
+                                    <label class="form-label fw-semibold">Portal Favicon</label>
+                                    <input type="file" class="form-control bg-light @error('portal_favicon') is-invalid @enderror" name="portal_favicon" accept="image/*">
+                                    <div class="form-text mt-2">Recommended: PNG or ICO, 32x32px. Max size: 512KB.</div>
+                                    @error('portal_favicon')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <div class="p-2 border rounded-4 bg-light d-inline-block shadow-sm">
+                                        @if($portalFavicon)
+                                            <img src="{{ asset('storage/' . $portalFavicon) }}" alt="Favicon" class="rounded-3" style="width: 32px; height: 32px; object-fit: contain;">
+                                            <div class="mt-2 small text-muted">Current Favicon</div>
+                                        @else
+                                            <div class="d-flex align-items-center justify-content-center text-muted rounded-3" style="width: 40px; height: 40px; background: #eee; border: 2px dashed #ccc;">
+                                                <i class="bi bi-app fs-5 opacity-25"></i>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <hr class="my-5 opacity-10">
