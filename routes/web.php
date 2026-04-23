@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\LinkController as AdminLinkController;
 use App\Http\Controllers\Admin\VideoController as AdminVideoController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
+use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\LinkController as UserLinkController;
 use App\Http\Controllers\User\VideoController as UserVideoController;
@@ -97,6 +98,9 @@ Route::middleware('auth')->group(function () {
         // System Settings
         Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');
         Route::post('/settings', [AdminSettingController::class, 'update'])->name('settings.update');
+
+        // Unit Management
+        Route::resource('units', UnitController::class)->except(['show', 'create', 'edit']);
     });
 
     // User Routes

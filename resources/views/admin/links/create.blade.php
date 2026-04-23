@@ -32,6 +32,19 @@
                             @error('category_id')
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                             @enderror
+                        <div class="mb-4">
+                            <label for="units" class="form-label fw-semibold text-dark">Related Units (Labels)</label>
+                            <div class="d-flex flex-wrap gap-2">
+                                @foreach($units as $unit)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="units[]" value="{{ $unit->id }}" id="unit_{{ $unit->id }}" {{ in_array($unit->id, old('units', [])) ? 'checked' : '' }}>
+                                        <label class="form-check-label px-2 py-0 rounded-pill text-white small" for="unit_{{ $unit->id }}" style="background-color: {{ $unit->color }} !important; font-size: 0.75rem;">
+                                            {{ $unit->name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="form-text text-muted">Select departments related to this link.</div>
                         </div>
 
                         <div class="mb-4">

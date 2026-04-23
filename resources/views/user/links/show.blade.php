@@ -51,6 +51,13 @@
                                     @endif
                                     <div class="min-w-0 {{ $link->banner_image ? '' : 'mt-2' }}">
                                         <h5 class="fw-bold text-dark mb-0 line-clamp-2">{{ $link->title }}</h5>
+                                        <div class="d-flex flex-wrap gap-1 mt-1">
+                                            @foreach($link->units as $unit)
+                                                <span class="px-2 py-0 rounded-pill text-white small" style="background-color: {{ $unit->color }} !important; font-size: 0.65rem;">
+                                                    {{ $unit->name }}
+                                                </span>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="text-muted small mb-0">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Link;
 use App\Models\Category;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,7 +19,8 @@ class LinkController extends Controller
     public function create()
     {
         $categories = Category::whereIn('type', ['link', 'both'])->where('is_active', true)->orderBy('order')->get();
-        return view('admin.links.create', compact('categories'));
+        $units = Unit::orderBy('name')->get();
+        return view('admin.links.create', compact('categories', 'units'));
     }
 
     public function store(Request $request)
@@ -33,6 +35,8 @@ class LinkController extends Controller
             'order' => 'nullable|integer',
             'is_active' => 'boolean',
             'is_public' => 'boolean',
+            'units' => 'nullable|array',
+            'units.*' => 'exists:units,id',
         ]);
 
         if ($request->hasFile('cover_image')) {
@@ -46,7 +50,11 @@ class LinkController extends Controller
         $validated['is_active'] = $request->has('is_active');
         $validated['is_public'] = $request->has('is_public');
 
-        Link::create($validated);
+        $link = Link::create($validated);
+
+        if ($request->has('units')) {
+            $link->units()->sync($request->units);
+        }
 
         return redirect()->route('admin.links.index')->with('success', 'Link berhasil dibuat');
     }
@@ -54,7 +62,8 @@ class LinkController extends Controller
     public function edit(Link $link)
     {
         $categories = Category::whereIn('type', ['link', 'both'])->where('is_active', true)->orderBy('order')->get();
-        return view('admin.links.edit', compact('link', 'categories'));
+        $units = Unit::orderBy('name')->get();
+        return view('admin.links.edit', compact('link', 'categories', 'units'));
     }
 
     public function update(Request $request, Link $link)
@@ -69,6 +78,8 @@ class LinkController extends Controller
             'order' => 'nullable|integer',
             'is_active' => 'boolean',
             'is_public' => 'boolean',
+            'units' => 'nullable|array',
+            'units.*' => 'exists:units,id',
         ]);
 
         if ($request->hasFile('cover_image')) {
@@ -91,6 +102,8 @@ class LinkController extends Controller
         $validated['is_public'] = $request->has('is_public');
 
         $link->update($validated);
+        
+        $link->units()->sync($request->units ?? []);
 
         return redirect()->route('admin.links.index')->with('success', 'Link berhasil diperbarui');
     }

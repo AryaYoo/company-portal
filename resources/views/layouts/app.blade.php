@@ -158,6 +158,9 @@
                         <a href="{{ route('admin.videos.index') }}" class="@if(str_starts_with(Route::currentRouteName(), 'admin.videos')) active @endif">
                             <i class="bi bi-play-btn-fill"></i> <span class="d-none d-md-inline">Video</span>
                         </a>
+                        <a href="{{ route('admin.units.index') }}" class="@if(str_starts_with(Route::currentRouteName(), 'admin.units')) active @endif">
+                            <i class="bi bi-tag-fill"></i> <span class="d-none d-md-inline">Unit Label</span>
+                        </a>
                         <a href="{{ route('admin.settings.index') }}" class="@if(str_starts_with(Route::currentRouteName(), 'admin.settings')) active @endif">
                             <i class="bi bi-gear-fill"></i> <span class="d-none d-md-inline">Pengaturan</span>
                         </a>
