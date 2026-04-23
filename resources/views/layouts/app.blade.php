@@ -149,9 +149,17 @@
         <div class="d-flex">
             <!-- Sidebar -->
             <div class="sidebar col-auto col-md-3 col-xl-2 px-0 fixed-top" style="position: sticky; top: 0;">
-                <div class="sidebar-brand text-white">
-                    <i class="bi bi-buildings fs-4"></i>
-                    <span class="fs-5 d-none d-md-inline">Portal RSIA IBI</span>
+                <div class="sidebar-brand text-white py-4">
+                    @php
+                        $portalLogo = \App\Models\Setting::get('portal_logo');
+                        $portalName = \App\Models\Setting::get('portal_name', 'Portal RSIA IBI');
+                    @endphp
+                    @if($portalLogo)
+                        <img src="{{ asset('storage/' . $portalLogo) }}" alt="Logo" class="img-fluid" style="max-height: 40px;">
+                    @else
+                        <i class="bi bi-buildings fs-4"></i>
+                    @endif
+                    <span class="fs-5 d-none d-md-inline fw-bold ms-1">{{ $portalName }}</span>
                 </div>
                 <nav class="mt-3">
                     @if(auth()->check() && auth()->user()->role === 'admin')

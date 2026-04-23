@@ -301,7 +301,16 @@
         <section class="info-hub">
             <div class="brand-header">
                 <div class="brand-logo">
-                    <i class="bi bi-buildings-fill fs-3"></i> PORTAL RSIA IBI
+                    @php
+                        $portalLogo = \App\Models\Setting::get('portal_logo');
+                        $portalName = \App\Models\Setting::get('portal_name', 'Portal RSIA IBI');
+                    @endphp
+                    @if($portalLogo)
+                        <img src="{{ asset('storage/' . $portalLogo) }}" alt="Logo" class="img-fluid me-2" style="max-height: 40px;">
+                    @else
+                        <i class="bi bi-buildings-fill fs-3 me-2"></i> 
+                    @endif
+                    {{ strtoupper($portalName) }}
                 </div>
             </div>
 

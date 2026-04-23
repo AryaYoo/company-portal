@@ -18,6 +18,47 @@
                         @csrf
                         
                         <div class="mb-5">
+                            <h5 class="fw-bold mb-3"><i class="bi bi-display text-primary me-2"></i> Portal Identity</h5>
+                            <p class="text-muted small">Change the branding of the portal including logo and application name.</p>
+                            
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Portal Name</label>
+                                <input type="text" class="form-control bg-light @error('portal_name') is-invalid @enderror" name="portal_name" value="{{ old('portal_name', $portalName) }}" placeholder="e.g. Portal RSIA IBI">
+                                @error('portal_name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="row align-items-center mt-4">
+                                <div class="col-md-6 mb-4 mb-md-0">
+                                    <label class="form-label fw-semibold">Portal Logo</label>
+                                    <input type="file" class="form-control bg-light @error('portal_logo') is-invalid @enderror" name="portal_logo" accept="image/*">
+                                    <div class="form-text mt-2">Recommended square or horizontal logo. Max size: 2MB.</div>
+                                    @error('portal_logo')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <div class="p-2 border rounded-4 bg-light d-inline-block shadow-sm">
+                                        @if($portalLogo)
+                                            <img src="{{ asset('storage/' . $portalLogo) }}" alt="Portal Logo" class="rounded-3 object-fit-contain" style="width: 100%; max-width: 150px; height: 60px;">
+                                            <div class="mt-2 small text-muted">Current Logo Preview</div>
+                                        @else
+                                            <div class="d-flex align-items-center justify-content-center text-muted rounded-3" style="width: 150px; height: 60px; background: #eee; border: 2px dashed #ccc;">
+                                                <div class="text-center">
+                                                    <i class="bi bi-image fs-4 opacity-25"></i>
+                                                    <p style="font-size: 0.7rem;" class="mb-0">No logo set</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-5 opacity-10">
+
+                        <div class="mb-5">
                             <h5 class="fw-bold mb-3"><i class="bi bi-image text-primary me-2"></i> Login Page Customization</h5>
                             <p class="text-muted small">The wallpaper will be displayed on the left section of the login and register pages.</p>
                             
