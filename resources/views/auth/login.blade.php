@@ -145,8 +145,7 @@
             background: white;
             position: relative;
             z-index: 10;
-            clip-path: polygon(80px 0, 100% 0, 100% 100%, 80px 100%, 0 50%);
-            margin-left: -80px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 65%, 60px 60%, 60px 40%, 0 35%);
         }
 
         @media (max-width: 992px) {
