@@ -143,6 +143,10 @@
             justify-content: center;
             padding: 4rem;
             background: white;
+            position: relative;
+            z-index: 10;
+            clip-path: polygon(80px 0, 100% 0, 100% 100%, 80px 100%, 0 50%);
+            margin-left: -80px;
         }
 
         @media (max-width: 992px) {
@@ -157,6 +161,8 @@
 
             .login-portal {
                 padding: 3rem 2rem;
+                clip-path: none;
+                margin-left: 0;
             }
         }
 
