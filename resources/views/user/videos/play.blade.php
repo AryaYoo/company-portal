@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Playing: ' . $video->title)
+@section('title', 'Menonton: ' . $video->title)
 
 @section('content')
     <div class="mb-4 d-flex align-items-center justify-content-between">
         <a href="{{ route('user.videos.show', $video->category) }}" class="btn btn-sm btn-light border rounded-pill px-3">
-            <i class="bi bi-arrow-left me-1"></i> Back to {{ $video->category->name }}
+            <i class="bi bi-arrow-left me-1"></i> Kembali ke {{ $video->category->name }}
         </a>
         <div class="d-none d-md-block">
             <span class="badge bg-light text-dark border rounded-pill px-3 py-2">
@@ -36,7 +36,7 @@
                     @else
                         <div class="d-flex align-items-center justify-content-center text-white-50 h-100 flex-column gap-3">
                             <i class="bi bi-exclamation-triangle fs-1"></i>
-                            <p>Video source unavailable or invalid.</p>
+                            <p>Sumber video tidak tersedia atau tidak valid.</p>
                         </div>
                     @endif
                 </div>
@@ -57,12 +57,12 @@
                     <hr class="my-4 opacity-10">
                     
                     <div>
-                        <h5 class="fw-bold text-dark mb-3"><i class="bi bi-justify-left text-primary me-2"></i> Description</h5>
+                        <h5 class="fw-bold text-dark mb-3"><i class="bi bi-justify-left text-primary me-2"></i> Deskripsi</h5>
                         <div class="text-muted lh-base">
                             @if($video->description)
                                 {!! nl2br(e($video->description)) !!}
                             @else
-                                <p class="fst-italic opacity-50">No description available for this video tutorial.</p>
+                                <p class="fst-italic opacity-50">Tidak ada deskripsi untuk video ini.</p>
                             @endif
                         </div>
                     </div>
@@ -75,7 +75,7 @@
             <div class="card border-0 shadow-sm rounded-4 h-100">
                 <div class="card-header bg-white border-0 py-4 px-4 overflow-hidden position-relative">
                     <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-5"></div>
-                    <h5 class="mb-0 fw-bold position-relative"><i class="bi bi-collection-play-fill text-primary me-2"></i> Up Next</h5>
+                    <h5 class="mb-0 fw-bold position-relative"><i class="bi bi-collection-play-fill text-primary me-2"></i> Selanjutnya</h5>
                 </div>
                 <div class="card-body p-0">
                     @php
@@ -110,7 +110,7 @@
                                             <h6 class="mb-1 text-dark fw-bold text-truncate" style="font-size: 0.9rem;">{{ $otherVideo->title }}</h6>
                                             <small class="text-muted d-block text-truncate">{{ Str::limit($otherVideo->description, 40) }}</small>
                                             <div class="mt-1">
-                                                <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill small" style="font-size: 0.7rem;">Play Now</span>
+                                                <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill small" style="font-size: 0.7rem;">Putar Sekarang</span>
                                             </div>
                                         </div>
                                     </div>
@@ -120,7 +120,7 @@
                     @else
                         <div class="p-5 text-center text-muted">
                             <i class="bi bi-camera-video-off fs-1 d-block mb-3 opacity-25"></i>
-                            <p class="small mb-0">No more videos in this category.</p>
+                            <p class="small mb-0">Tidak ada video lain di kategori ini.</p>
                         </div>
                     @endif
                 </div>

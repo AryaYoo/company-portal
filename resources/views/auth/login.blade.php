@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Entry - Company Name</title>
+    <title>Portal Masuk - RSIA IBI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -306,17 +306,20 @@
             </div>
 
             <div class="content-body">
-                <h3 class="section-title"><i class="bi bi-lightning-charge text-warning"></i> Quick Access Resources
+                <h3 class="section-title"><i class="bi bi-lightning-charge text-warning"></i> Akses Cepat
                 </h3>
                 @forelse($groupedLinks as $categoryName => $links)
-                    <h5 class="mt-4 mb-3 fw-bold text-dark opacity-75 fs-6 text-uppercase" style="letter-spacing: 0.5px;">{{ $categoryName }}</h5>
+                    <h6 class="mt-4 mb-3 fw-normal text-white opacity-50 text-uppercase"
+                        style="letter-spacing: 1px; font-size: 0.75rem;">{{ $categoryName }}</h6>
                     <div class="resource-grid">
                         @foreach($links as $link)
                             <a href="{{ $link->url }}" target="_blank" class="resource-tile p-2 pe-3">
                                 @if($link->cover_image)
-                                    <img src="{{ asset('storage/' . $link->cover_image) }}" alt="{{ $link->title }}" class="rounded shadow-sm" style="width: 45px; height: 45px; object-fit: cover;">
+                                    <img src="{{ asset('storage/' . $link->cover_image) }}" alt="{{ $link->title }}"
+                                        class="rounded shadow-sm" style="width: 45px; height: 45px; object-fit: cover;">
                                 @else
-                                    <div class="rounded bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                                    <div class="rounded bg-primary bg-opacity-10 d-flex align-items-center justify-content-center"
+                                        style="width: 45px; height: 45px;">
                                         <i class="bi bi-link-45deg fs-4 text-primary"></i>
                                     </div>
                                 @endif
@@ -325,12 +328,13 @@
                         @endforeach
                     </div>
                 @empty
-                    <div class="text-muted small fst-italic">No public links available.</div>
+                    <div class="text-muted small fst-italic">Tautan publik tidak tersedia.</div>
                 @endforelse
 
-                <h3 class="section-title mt-5"><i class="bi bi-play-circle text-danger"></i> Common Tutorials</h3>
+                <h3 class="section-title mt-5"><i class="bi bi-play-circle text-danger"></i> Tutorial Video</h3>
                 @forelse($groupedVideos as $categoryName => $videos)
-                    <h5 class="mt-4 mb-3 fw-bold text-dark opacity-75 fs-6 text-uppercase" style="letter-spacing: 0.5px;">{{ $categoryName }}</h5>
+                    <h6 class="mt-4 mb-3 fw-normal text-white opacity-50 text-uppercase"
+                        style="letter-spacing: 1px; font-size: 0.75rem;">{{ $categoryName }}</h6>
                     <div class="tutorial-container mb-4">
                         @foreach($videos as $video)
                             <a href="{{ route('videos.play', $video) }}" class="text-decoration-none h-100">
@@ -356,14 +360,13 @@
                                     </div>
                                     <div class="p-3">
                                         <h6 class="fw-bold text-dark mb-1 text-truncate">{{ $video->title }}</h6>
-                                        <p class="text-muted small mb-0">{{ Str::limit($video->description, 50) }}</p>
                                     </div>
                                 </div>
                             </a>
                         @endforeach
                     </div>
                 @empty
-                    <div class="text-muted small fst-italic">No public tutorials available.</div>
+                    <div class="text-muted small fst-italic">Video tutorial tidak tersedia.</div>
                 @endforelse
             </div>
         </section>
@@ -372,8 +375,8 @@
         <section class="login-portal">
             <div class="login-container">
                 <div class="text-center mb-5">
-                    <h2 class="fw-bold">Welcome Back</h2>
-                    <p class="text-muted">Sign in to your account to continue</p>
+                    <h2 class="fw-bold">Selamat Datang</h2>
+                    <p class="text-muted">Silakan masuk ke akun Anda</p>
                 </div>
 
                 <form action="{{ route('login.post') }}" method="POST">
@@ -381,29 +384,29 @@
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" name="email" id="emailInput" value="{{ old('email') }}"
                             placeholder="name@company.com" required autofocus>
-                        <label for="emailInput">Email Address</label>
+                        <label for="emailInput">Alamat Email</label>
                     </div>
 
                     <div class="form-floating mb-3">
                         <input type="password" class="form-control" name="password" id="passwordInput"
                             placeholder="Password" required>
-                        <label for="passwordInput">Password</label>
+                        <label for="passwordInput">Kata Sandi</label>
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                            <label class="form-check-label text-muted small" for="remember">Remember me</label>
+                            <label class="form-check-label text-muted small" for="remember">Ingat Saya</label>
                         </div>
                     </div>
 
                     <button type="submit" class="btn btn-portal mb-3">
-                        Login to Portal <i class="bi bi-arrow-right ms-1"></i>
+                        Masuk ke Portal <i class="bi bi-arrow-right ms-1"></i>
                     </button>
 
                     <div class="text-center mt-3">
-                        <small class="text-muted">Need an account? <a href="{{ route('register') }}"
-                                class="text-primary fw-600 text-decoration-none">Register here</a></small>
+                        <small class="text-muted">Belum punya akun? <a href="{{ route('register') }}"
+                                class="text-primary fw-600 text-decoration-none">Daftar di sini</a></small>
                     </div>
                 </form>
             </div>
@@ -413,7 +416,7 @@
     <!-- Floating Helpdesk Button -->
     <a href="http://192.168.100.177/mastolongmas/public" target="_blank" class="btn-help">
         <i class="bi bi-life-preserver"></i>
-        <span>Helpdesk</span>
+        <span>Bantuan IT</span>
     </a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

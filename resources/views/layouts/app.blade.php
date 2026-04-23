@@ -142,34 +142,34 @@
             <div class="sidebar col-auto col-md-3 col-xl-2 px-0 fixed-top" style="position: sticky; top: 0;">
                 <div class="sidebar-brand text-white">
                     <i class="bi bi-buildings fs-4"></i>
-                    <span class="fs-5 d-none d-md-inline">Portal System</span>
+                    <span class="fs-5 d-none d-md-inline">Portal RSIA IBI</span>
                 </div>
                 <nav class="mt-3">
                     @if(auth()->check() && auth()->user()->role === 'admin')
                         <a href="{{ route('admin.dashboard') }}" class="@if(Route::currentRouteName() === 'admin.dashboard') active @endif">
-                            <i class="bi bi-grid-1x2-fill"></i> <span class="d-none d-md-inline">Dashboard</span>
+                            <i class="bi bi-grid-1x2-fill"></i> <span class="d-none d-md-inline">Beranda</span>
                         </a>
                         <a href="{{ route('admin.categories.index') }}" class="@if(str_starts_with(Route::currentRouteName(), 'admin.categories')) active @endif">
-                            <i class="bi bi-tags-fill"></i> <span class="d-none d-md-inline">Category</span>
+                            <i class="bi bi-tags-fill"></i> <span class="d-none d-md-inline">Kategori</span>
                         </a>
                         <a href="{{ route('admin.links.index') }}" class="@if(str_starts_with(Route::currentRouteName(), 'admin.links')) active @endif">
-                            <i class="bi bi-link-45deg fs-5"></i> <span class="d-none d-md-inline">Links</span>
+                            <i class="bi bi-link-45deg fs-5"></i> <span class="d-none d-md-inline">Tautan</span>
                         </a>
                         <a href="{{ route('admin.videos.index') }}" class="@if(str_starts_with(Route::currentRouteName(), 'admin.videos')) active @endif">
-                            <i class="bi bi-play-btn-fill"></i> <span class="d-none d-md-inline">Videos</span>
+                            <i class="bi bi-play-btn-fill"></i> <span class="d-none d-md-inline">Video</span>
                         </a>
                         <a href="{{ route('admin.settings.index') }}" class="@if(str_starts_with(Route::currentRouteName(), 'admin.settings')) active @endif">
-                            <i class="bi bi-gear-fill"></i> <span class="d-none d-md-inline">Settings</span>
+                            <i class="bi bi-gear-fill"></i> <span class="d-none d-md-inline">Pengaturan</span>
                         </a>
                     @elseif(auth()->check() && auth()->user()->role === 'user')
                         <a href="{{ route('user.dashboard') }}" class="@if(Route::currentRouteName() === 'user.dashboard') active @endif">
-                            <i class="bi bi-grid-1x2-fill"></i> <span class="d-none d-md-inline">Dashboard</span>
+                            <i class="bi bi-grid-1x2-fill"></i> <span class="d-none d-md-inline">Beranda</span>
                         </a>
                         <a href="{{ route('user.links.index') }}" class="@if(str_starts_with(Route::currentRouteName(), 'user.links')) active @endif">
-                            <i class="bi bi-link-45deg fs-5"></i> <span class="d-none d-md-inline">Links</span>
+                            <i class="bi bi-link-45deg fs-5"></i> <span class="d-none d-md-inline">Tautan</span>
                         </a>
                         <a href="{{ route('user.videos.index') }}" class="@if(str_starts_with(Route::currentRouteName(), 'user.videos')) active @endif">
-                            <i class="bi bi-play-btn-fill"></i> <span class="d-none d-md-inline">Videos</span>
+                            <i class="bi bi-play-btn-fill"></i> <span class="d-none d-md-inline">Video</span>
                         </a>
                     @endif
                     <hr class="text-secondary mx-3 mt-4">
@@ -177,7 +177,7 @@
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-outline-light w-100 btn-sm py-2 d-flex align-items-center justify-content-center gap-2">
-                                <i class="bi bi-box-arrow-right"></i> <span class="d-none d-md-inline">Logout</span>
+                                <i class="bi bi-box-arrow-right"></i> <span class="d-none d-md-inline">Keluar</span>
                             </button>
                         </form>
                     </div>

@@ -1,55 +1,37 @@
 @extends('layouts.app')
 
-@section('title', 'Video Folders')
+@section('title', 'Video Tutorial')
 
 @section('content')
-    <div class="mb-5 text-center text-md-start">
-        <h2 class="fw-bold mb-2"><i class="bi bi-collection-play text-primary me-2"></i> Tutorial Directory</h2>
-        <p class="text-muted">Browse video tutorials categorized by topic.</p>
+    <div class="mb-5 text-center">
+        <h2 class="fw-bold mb-2"><i class="bi bi-collection-play text-danger me-2"></i> Direktori Video</h2>
+        <p class="text-muted">Pilih kategori video di bawah ini</p>
     </div>
 
     @if($categories->count() > 0)
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
             @foreach($categories as $category)
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative hover-lift">
-                        <div class="position-absolute top-0 start-0 w-100 bg-danger" style="height: 4px;"></div>
-                        <div class="card-body p-4 d-flex flex-column">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="bg-danger bg-opacity-10 text-danger rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 48px; height: 48px;">
-                                    <i class="bi bi-folder-video fs-4"></i>
+                <div class="col-md-4 col-lg-3">
+                    <a href="{{ route('user.videos.show', $category) }}" class="text-decoration-none">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 text-center hover-lift">
+                            <div class="card-body p-4">
+                                <div class="bg-danger bg-opacity-10 text-danger rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-folder-video fs-2"></i>
                                 </div>
-                                <h5 class="card-title fw-bold mb-0 text-dark">{{ $category->name }}</h5>
-                            </div>
-                            
-                            <p class="card-text text-muted small flex-grow-1 mb-4">
-                                @if($category->description)
-                                    {{ Str::limit($category->description, 90) }}
-                                @else
-                                    Access all videos related to {{ $category->name }}.
-                                @endif
-                            </p>
-                            
-                            <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
-                                <span class="badge bg-light text-secondary border px-2 py-1">
-                                    <i class="bi bi-play-circle"></i> {{ $category->videos()->count() }} Videos
+                                <h5 class="fw-bold text-dark mb-2">{{ $category->name }}</h5>
+                                <span class="badge bg-light text-secondary border rounded-pill">
+                                    <i class="bi bi-play-circle"></i> {{ $category->videos()->count() }} Video
                                 </span>
-                                <a href="{{ route('user.videos.show', $category) }}" class="btn btn-sm btn-outline-danger rounded-pill stretched-link px-3">
-                                    Browse
-                                </a>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @endforeach
         </div>
     @else
-        <div class="card border-0 shadow-sm rounded-4 text-center py-5">
-            <div class="card-body">
-                <i class="bi bi-collection-play fs-1 text-muted mb-3 d-block"></i>
-                <h5 class="fw-medium text-dark">No Categories Available</h5>
-                <p class="text-muted mb-0">Check back later or contact your administrator.</p>
-            </div>
+        <div class="text-center py-5">
+            <i class="bi bi-collection-play fs-1 text-muted mb-3 d-block"></i>
+            <h5 class="fw-medium text-dark">Tidak ada kategori</h5>
         </div>
     @endif
 @endsection

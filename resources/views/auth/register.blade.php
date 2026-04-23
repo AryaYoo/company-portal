@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Company Portal</title>
+    <title>Daftar - Portal RSIA IBI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
             justify-content: center;
             padding: 2rem 0;
         }
-        .login-container {
+        .register-container {
             width: 100%;
             max-width: 450px;
             padding: 1rem;
@@ -33,28 +33,27 @@
         .card {
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
             border: none;
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
         }
         .card-header {
             background-color: var(--primary-color);
             border: none;
-            padding: 2rem;
+            padding: 2.5rem 2rem;
             text-align: center;
         }
         .card-header h2 {
             color: white;
             margin: 0;
             font-weight: 700;
-            letter-spacing: 0.5px;
         }
         .card-body {
-            padding: 2rem;
+            padding: 2.5rem 2rem;
             background-color: #ffffff;
         }
         .form-control {
             padding: 0.75rem 1rem;
-            border-radius: 8px;
+            border-radius: 12px;
             border: 1px solid #dee2e6;
         }
         .form-control:focus {
@@ -62,78 +61,78 @@
             box-shadow: 0 0 0 0.2rem rgba(85, 107, 47, 0.25);
         }
         .form-label {
-            font-weight: 500;
+            font-weight: 600;
             color: #495057;
             margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
-        .btn-login {
+        .btn-register {
             background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 0.8rem;
-            font-weight: 600;
-            border-radius: 8px;
+            padding: 0.9rem;
+            font-weight: 700;
+            border-radius: 12px;
             width: 100%;
             transition: all 0.3s;
+            margin-top: 1rem;
         }
-        .btn-login:hover {
+        .btn-register:hover {
             background-color: var(--primary-hover);
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(85, 107, 47, 0.3);
+            box-shadow: 0 5px 15px rgba(85, 107, 47, 0.3);
         }
-        .register-link {
+        .login-link {
             text-align: center;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
             color: #6c757d;
+            font-size: 0.9rem;
         }
-        .register-link a {
+        .login-link a {
             color: var(--primary-color);
             text-decoration: none;
-            font-weight: 600;
-        }
-        .register-link a:hover {
-            text-decoration: underline;
+            font-weight: 700;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
+    <div class="register-container">
         <div class="card">
             <div class="card-header">
-                <h2><i class="bi bi-person-plus-fill"></i> Register</h2>
-                <p class="text-white-50 mt-2 mb-0">Create new account</p>
+                <h2><i class="bi bi-person-plus-fill me-2"></i>Daftar Akun</h2>
+                <p class="text-white-50 mt-2 mb-0">Lengkapi data di bawah ini</p>
             </div>
             <div class="card-body">
                 <form action="{{ route('register.post') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="name" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="John Doe" required autofocus>
+                        <label for="name" class="form-label">Nama Lengkap</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="Contoh: John Doe" required autofocus>
                     </div>
 
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" placeholder="name@company.com" required>
+                        <label for="email" class="form-label">Alamat Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" placeholder="nama@perusahaan.com" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
+                        <label for="password" class="form-label">Kata Sandi</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
                     </div>
 
                     <div class="mb-4">
-                        <label for="password_confirmation" class="form-label">Confirm Password</label>
+                        <label for="password_confirmation" class="form-label">Konfirmasi Kata Sandi</label>
                         <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="••••••••" required>
                     </div>
 
-                    <button type="submit" class="btn btn-login">
-                        Register Account <i class="bi bi-check-circle ms-1"></i>
+                    <button type="submit" class="btn btn-register">
+                        Daftar Sekarang <i class="bi bi-arrow-right-circle ms-2"></i>
                     </button>
                 </form>
 
-                <div class="register-link">
-                    Already have an account? <a href="{{ route('login') }}">Sign in here</a>
+                <div class="login-link">
+                    Sudah punya akun? <a href="{{ route('login') }}">Masuk di sini</a>
                 </div>
             </div>
         </div>
@@ -146,7 +145,7 @@
             @if($errors->any())
                 Swal.fire({
                     icon: 'error',
-                    title: 'Registration Failed!',
+                    title: 'Pendaftaran Gagal!',
                     html: `
                         <ul class="text-start mb-0">
                             @foreach($errors->all() as $error)
