@@ -54,13 +54,13 @@
         }
 
         @if($loginWallpaper)
-            .info-hub {
+            .page-wrapper {
                 background-image: url("{{ asset('storage/' . $loginWallpaper) }}");
                 background-size: cover;
                 background-position: center;
             }
 
-            .info-hub::before {
+            .page-wrapper::before {
                 content: "";
                 position: absolute;
                 top: 0;
@@ -69,6 +69,11 @@
                 height: 100%;
                 background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(85, 107, 47, 0.6) 100%);
                 z-index: 0;
+            }
+
+            .info-hub {
+                background: transparent !important;
+                border-right: none !important;
             }
 
             .info-hub>* {
@@ -145,7 +150,7 @@
             background: white;
             position: relative;
             z-index: 10;
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 65%, 60px 60%, 60px 40%, 0 35%);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 70%, 50px 65%, 50px 35%, 0 30%);
         }
 
         @media (max-width: 992px) {
