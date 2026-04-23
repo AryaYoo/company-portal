@@ -21,6 +21,7 @@
                         <th class="py-3 px-4 text-muted fw-semibold border-bottom-0" style="width: 5%">#</th>
                         <th class="py-3 px-4 text-muted fw-semibold border-bottom-0">Category Name</th>
                         <th class="py-3 px-4 text-muted fw-semibold border-bottom-0">Description</th>
+                        <th class="py-3 px-4 text-muted fw-semibold border-bottom-0" style="width: 15%">Type</th>
                         <th class="py-3 px-4 text-muted fw-semibold border-bottom-0" style="width: 10%">Order</th>
                         <th class="py-3 px-4 text-muted fw-semibold border-bottom-0" style="width: 15%">Status</th>
                         <th class="py-3 px-4 text-muted fw-semibold text-end border-bottom-0" style="width: 15%">Actions</th>
@@ -32,6 +33,15 @@
                             <td class="px-4 text-muted py-3">{{ $key + 1 }}</td>
                             <td class="px-4 fw-medium text-dark py-3">{{ $category->name }}</td>
                             <td class="px-4 text-muted py-3">{{ Str::limit($category->description, 50) ?: '-' }}</td>
+                            <td class="px-4 py-3">
+                                @if($category->type == 'link')
+                                    <span class="badge bg-info-subtle text-info rounded-pill px-3 py-2"><i class="bi bi-link-45deg me-1"></i> Link</span>
+                                @elseif($category->type == 'video')
+                                    <span class="badge bg-danger-subtle text-danger rounded-pill px-3 py-2"><i class="bi bi-play-btn me-1"></i> Video</span>
+                                @else
+                                    <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2"><i class="bi bi-layers me-1"></i> Both</span>
+                                @endif
+                            </td>
                             <td class="px-4 py-3">{{ $category->order }}</td>
                             <td class="px-4 py-3">
                                 @if($category->is_active)

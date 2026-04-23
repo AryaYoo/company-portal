@@ -11,14 +11,14 @@ class LinkController extends Controller
 {
     public function index()
     {
-        $categories = Category::where('is_active', true)->orderBy('order')->get();
+        $categories = Category::whereIn('type', ['link', 'both'])->where('is_active', true)->orderBy('order')->get();
         return view('user.links.index', compact('categories'));
     }
 
     public function show(Category $category)
     {
         $links = $category->links()->where('is_active', true)->orderBy('order')->get();
-        $categories = Category::where('is_active', true)->orderBy('order')->get();
+        $categories = Category::whereIn('type', ['link', 'both'])->where('is_active', true)->orderBy('order')->get();
         return view('user.links.show', compact('category', 'links', 'categories'));
     }
 }

@@ -19,10 +19,19 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    $publicLinks = Link::where('is_active', true)->where('is_public', true)->orderBy('order')->get();
-    $publicVideos = Video::where('is_active', true)->where('is_public', true)->orderBy('order')->get();
+    $publicLinks = Link::with('category')->where('is_active', true)->where('is_public', true)->orderBy('order')->get();
+    $publicVideos = Video::with('category')->where('is_active', true)->where('is_public', true)->orderBy('order')->get();
+    
+    $groupedLinks = $publicLinks->groupBy(function($item) {
+        return $item->category ? $item->category->name : 'Uncategorized';
+    });
+    
+    $groupedVideos = $publicVideos->groupBy(function($item) {
+        return $item->category ? $item->category->name : 'Uncategorized';
+    });
+
     $loginWallpaper = Setting::get('login_wallpaper');
-    return view('auth.login', compact('publicLinks', 'publicVideos', 'loginWallpaper'));
+    return view('auth.login', compact('groupedLinks', 'groupedVideos', 'loginWallpaper'));
 })->middleware('guest')->name('login');
 
 Route::post('/login', function () {

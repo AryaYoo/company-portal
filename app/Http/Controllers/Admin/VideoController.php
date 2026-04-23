@@ -17,7 +17,7 @@ class VideoController extends Controller
 
     public function create()
     {
-        $categories = Category::where('is_active', true)->orderBy('order')->get();
+        $categories = Category::whereIn('type', ['video', 'both'])->where('is_active', true)->orderBy('order')->get();
         return view('admin.videos.create', compact('categories'));
     }
 
@@ -55,7 +55,7 @@ class VideoController extends Controller
 
     public function edit(Video $video)
     {
-        $categories = Category::where('is_active', true)->orderBy('order')->get();
+        $categories = Category::whereIn('type', ['video', 'both'])->where('is_active', true)->orderBy('order')->get();
         return view('admin.videos.edit', compact('video', 'categories'));
     }
 

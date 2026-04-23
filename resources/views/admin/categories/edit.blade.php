@@ -29,6 +29,18 @@
                         </div>
 
                         <div class="mb-4">
+                            <label for="type" class="form-label fw-semibold text-dark">Category Type <span class="text-danger">*</span></label>
+                            <select class="form-select form-select-lg bg-light" id="type" name="type" required>
+                                <option value="both" {{ old('type', $category->type) == 'both' ? 'selected' : '' }}>Used for Both (Link & Video)</option>
+                                <option value="link" {{ old('type', $category->type) == 'link' ? 'selected' : '' }}>Link Only</option>
+                                <option value="video" {{ old('type', $category->type) == 'video' ? 'selected' : '' }}>Video Only</option>
+                            </select>
+                            @error('type')
+                                <div class="text-danger small mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
                             <label for="description" class="form-label fw-semibold text-dark">Description</label>
                             <textarea class="form-control bg-light" id="description" name="description" rows="4">{{ old('description', $category->description) }}</textarea>
                             @error('description')

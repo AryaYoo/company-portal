@@ -17,7 +17,7 @@ class LinkController extends Controller
 
     public function create()
     {
-        $categories = Category::where('is_active', true)->orderBy('order')->get();
+        $categories = Category::whereIn('type', ['link', 'both'])->where('is_active', true)->orderBy('order')->get();
         return view('admin.links.create', compact('categories'));
     }
 
@@ -48,7 +48,7 @@ class LinkController extends Controller
 
     public function edit(Link $link)
     {
-        $categories = Category::where('is_active', true)->orderBy('order')->get();
+        $categories = Category::whereIn('type', ['link', 'both'])->where('is_active', true)->orderBy('order')->get();
         return view('admin.links.edit', compact('link', 'categories'));
     }
 

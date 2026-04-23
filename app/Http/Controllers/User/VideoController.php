@@ -11,14 +11,14 @@ class VideoController extends Controller
 {
     public function index()
     {
-        $categories = Category::where('is_active', true)->orderBy('order')->get();
+        $categories = Category::whereIn('type', ['video', 'both'])->where('is_active', true)->orderBy('order')->get();
         return view('user.videos.index', compact('categories'));
     }
 
     public function show(Category $category)
     {
         $videos = $category->videos()->where('is_active', true)->orderBy('order')->get();
-        $categories = Category::where('is_active', true)->orderBy('order')->get();
+        $categories = Category::whereIn('type', ['video', 'both'])->where('is_active', true)->orderBy('order')->get();
         return view('user.videos.show', compact('category', 'videos', 'categories'));
     }
 

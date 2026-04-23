@@ -9,8 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Category extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['name', 'slug', 'description', 'order', 'is_active'];
+    protected $fillable = ['name', 'slug', 'description', 'type', 'order', 'is_active'];
 
     protected $casts = [
         'is_active' => 'boolean',

@@ -308,57 +308,63 @@
             <div class="content-body">
                 <h3 class="section-title"><i class="bi bi-lightning-charge text-warning"></i> Quick Access Resources
                 </h3>
-                <div class="resource-grid">
-                    @forelse($publicLinks as $link)
-                        <a href="{{ $link->url }}" target="_blank" class="resource-tile p-2 pe-3">
-                            @if($link->cover_image)
-                                <img src="{{ asset('storage/' . $link->cover_image) }}" alt="{{ $link->title }}" class="rounded shadow-sm" style="width: 45px; height: 45px; object-fit: cover;">
-                            @else
-                                <div class="rounded bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
-                                    <i class="bi bi-link-45deg fs-4 text-primary"></i>
-                                </div>
-                            @endif
-                            <span class="text-truncate fw-medium ms-1">{{ $link->title }}</span>
-                        </a>
-                    @empty
-                        <div class="text-muted small fst-italic">No public links available.</div>
-                    @endforelse
-                </div>
-
-                <h3 class="section-title"><i class="bi bi-play-circle text-danger"></i> Common Tutorials</h3>
-                <div class="tutorial-container">
-                    @forelse($publicVideos as $video)
-                        <a href="{{ route('videos.play', $video) }}" class="text-decoration-none h-100">
-                            <div class="tutorial-item">
-                                <div class="thumb-box">
-                                    @if($video->thumbnail)
-                                        <img src="{{ asset('storage/' . $video->thumbnail) }}" alt="{{ $video->title }}">
-                                    @else
-                                        <div
-                                            class="w-100 h-100 bg-secondary d-flex align-items-center justify-content-center text-white-50">
-                                            <i class="bi bi-image" style="font-size: 2rem;"></i>
-                                        </div>
-                                    @endif
-                                    <div class="play-indicator">
-                                        <i class="bi bi-play-fill"></i>
+                @forelse($groupedLinks as $categoryName => $links)
+                    <h5 class="mt-4 mb-3 fw-bold text-dark opacity-75 fs-6 text-uppercase" style="letter-spacing: 0.5px;">{{ $categoryName }}</h5>
+                    <div class="resource-grid">
+                        @foreach($links as $link)
+                            <a href="{{ $link->url }}" target="_blank" class="resource-tile p-2 pe-3">
+                                @if($link->cover_image)
+                                    <img src="{{ asset('storage/' . $link->cover_image) }}" alt="{{ $link->title }}" class="rounded shadow-sm" style="width: 45px; height: 45px; object-fit: cover;">
+                                @else
+                                    <div class="rounded bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                                        <i class="bi bi-link-45deg fs-4 text-primary"></i>
                                     </div>
-                                    @if($video->duration)
-                                        <div class="position-absolute bottom-0 end-0 m-2 bg-dark bg-opacity-75 text-white px-2 py-0 small rounded"
-                                            style="font-size: 0.7rem;">
-                                            {{ floor($video->duration / 60) }}:{{ str_pad($video->duration % 60, 2, '0', STR_PAD_LEFT) }}
+                                @endif
+                                <span class="text-truncate fw-medium ms-1">{{ $link->title }}</span>
+                            </a>
+                        @endforeach
+                    </div>
+                @empty
+                    <div class="text-muted small fst-italic">No public links available.</div>
+                @endforelse
+
+                <h3 class="section-title mt-5"><i class="bi bi-play-circle text-danger"></i> Common Tutorials</h3>
+                @forelse($groupedVideos as $categoryName => $videos)
+                    <h5 class="mt-4 mb-3 fw-bold text-dark opacity-75 fs-6 text-uppercase" style="letter-spacing: 0.5px;">{{ $categoryName }}</h5>
+                    <div class="tutorial-container mb-4">
+                        @foreach($videos as $video)
+                            <a href="{{ route('videos.play', $video) }}" class="text-decoration-none h-100">
+                                <div class="tutorial-item">
+                                    <div class="thumb-box">
+                                        @if($video->thumbnail)
+                                            <img src="{{ asset('storage/' . $video->thumbnail) }}" alt="{{ $video->title }}">
+                                        @else
+                                            <div
+                                                class="w-100 h-100 bg-secondary d-flex align-items-center justify-content-center text-white-50">
+                                                <i class="bi bi-image" style="font-size: 2rem;"></i>
+                                            </div>
+                                        @endif
+                                        <div class="play-indicator">
+                                            <i class="bi bi-play-fill"></i>
                                         </div>
-                                    @endif
+                                        @if($video->duration)
+                                            <div class="position-absolute bottom-0 end-0 m-2 bg-dark bg-opacity-75 text-white px-2 py-0 small rounded"
+                                                style="font-size: 0.7rem;">
+                                                {{ floor($video->duration / 60) }}:{{ str_pad($video->duration % 60, 2, '0', STR_PAD_LEFT) }}
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="p-3">
+                                        <h6 class="fw-bold text-dark mb-1 text-truncate">{{ $video->title }}</h6>
+                                        <p class="text-muted small mb-0">{{ Str::limit($video->description, 50) }}</p>
+                                    </div>
                                 </div>
-                                <div class="p-3">
-                                    <h6 class="fw-bold text-dark mb-1 text-truncate">{{ $video->title }}</h6>
-                                    <p class="text-muted small mb-0">{{ Str::limit($video->description, 50) }}</p>
-                                </div>
-                            </div>
-                        </a>
-                    @empty
-                        <div class="text-muted small fst-italic">No public tutorials available.</div>
-                    @endforelse
-                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                @empty
+                    <div class="text-muted small fst-italic">No public tutorials available.</div>
+                @endforelse
             </div>
         </section>
 

@@ -24,6 +24,7 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'type' => 'required|in:link,video,both',
             'description' => 'nullable|string',
             'order' => 'nullable|integer',
             'is_active' => 'boolean',
@@ -46,6 +47,7 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'type' => 'required|in:link,video,both',
             'description' => 'nullable|string',
             'order' => 'nullable|integer',
             'is_active' => 'boolean',
