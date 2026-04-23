@@ -3,13 +3,13 @@
 @section('title', 'Beranda')
 
 @section('content')
-    <div class="mb-5 text-center">
-        <h2 class="fw-bold"><i class="bi bi-person-badge"></i> Halo, {{ auth()->user()->name }}!</h2>
-        <p class="text-muted">Silakan pilih menu di bawah ini</p>
+    <div class="py-5 text-center mt-md-4">
+        <h1 class="fw-bold display-5 mb-2"><i class="bi bi-person-badge"></i> Halo, {{ auth()->user()->name }}!</h1>
+        <p class="text-muted fs-5">Silakan pilih menu atau cari layanan di bawah ini</p>
     </div>
 
     <!-- Global Search -->
-    <div class="row justify-content-center mb-5" x-data="{ 
+    <div class="row justify-content-center mb-5 pb-4" x-data="{ 
         query: '', 
         links: {{ $allLinks->map(fn($l) => [
             'title' => $l->title,
@@ -89,7 +89,7 @@
         </div>
     </div>
 
-    <div class="row g-4 justify-content-center">
+    <div class="row g-4 justify-content-center mt-5">
         <div class="col-md-5">
             <a href="{{ route('user.links.index') }}" class="text-decoration-none">
                 <div class="card h-100 border-0 shadow-sm hover-lift"
