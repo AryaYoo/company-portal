@@ -56,38 +56,6 @@
                                         </button>
                                     </form>
 
-                                    <!-- Edit Modal -->
-                                    <div class="modal fade text-start" id="editUnitModal{{ $unit->id }}" tabindex="-1" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content border-0 rounded-4 shadow">
-                                                <form action="{{ route('admin.units.update', $unit) }}" method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="modal-header border-0 pb-0">
-                                                        <h5 class="modal-title fw-bold">Edit Unit</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body text-start">
-                                                        <div class="mb-3">
-                                                            <label class="form-label fw-semibold">Unit Name</label>
-                                                            <input type="text" name="name" class="form-control bg-light" value="{{ $unit->name }}" required>
-                                                        </div>
-                                                        <div class="mb-0">
-                                                            <label class="form-label fw-semibold">Color Hex</label>
-                                                            <div class="d-flex gap-2">
-                                                                <input type="color" name="color" class="form-control form-control-color border-0 p-0" value="{{ $unit->color }}" title="Choose color">
-                                                                <input type="text" name="color_text" class="form-control bg-light" value="{{ $unit->color }}" readonly>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer border-0">
-                                                        <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
-                                                        <button type="submit" class="btn btn-primary rounded-pill px-4">Update Unit</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </td>
                             </tr>
                         @empty
@@ -111,20 +79,20 @@
                         <h5 class="modal-title fw-bold">Add New Unit</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body text-start">
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Unit Name</label>
-                            <input type="text" name="name" class="form-control bg-light" placeholder="e.g. IT, HR, Radiology" required>
+                    <div class="modal-body">
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-dark">Unit Name</label>
+                            <input type="text" name="name" class="form-control form-control-lg bg-light" placeholder="e.g. IT, HR, Radiology" required>
                         </div>
-                        <div class="mb-0">
-                            <label class="form-label fw-semibold">Color Hex</label>
-                            <div class="d-flex gap-2">
-                                <input type="color" name="color" class="form-control form-control-color border-0 p-0" value="#6c757d" title="Choose color">
-                                <input type="text" name="color_text_add" class="form-control bg-light" value="#6c757d" readonly>
+                        <div class="mb-2">
+                            <label class="form-label fw-semibold text-dark">Label Color</label>
+                            <div class="d-flex gap-3 align-items-center">
+                                <input type="color" name="color" class="form-control form-control-color border-0 p-0" style="width: 60px; height: 45px;" value="#6c757d" title="Choose color">
+                                <input type="text" class="form-control bg-light fw-mono" value="#6c757d" readonly style="width: 120px;">
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer border-0">
+                    <div class="modal-footer border-0 pt-0">
                         <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-primary rounded-pill px-4">Save Unit</button>
                     </div>
@@ -132,6 +100,41 @@
             </div>
         </div>
     </div>
+
+    <!-- Edit Unit Modals Loop -->
+    @foreach($units as $unit)
+        <div class="modal fade text-start" id="editUnitModal{{ $unit->id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 rounded-4 shadow">
+                    <form action="{{ route('admin.units.update', $unit) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-header border-0 pb-0">
+                            <h5 class="modal-title fw-bold text-dark">Edit Unit Label</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold text-dark">Unit Name</label>
+                                <input type="text" name="name" class="form-control form-control-lg bg-light" value="{{ $unit->name }}" required>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label fw-semibold text-dark">Label Color</label>
+                                <div class="d-flex gap-3 align-items-center">
+                                    <input type="color" name="color" class="form-control form-control-color border-0 p-0" style="width: 60px; height: 45px;" value="{{ $unit->color }}" title="Choose color">
+                                    <input type="text" class="form-control bg-light fw-mono" value="{{ $unit->color }}" readonly style="width: 120px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-0 pt-0">
+                            <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary rounded-pill px-4">Update Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection
 
 @push('scripts')
