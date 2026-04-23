@@ -105,6 +105,30 @@
                 color: white !important;
             }
 
+            @keyframes staggeredHover {
+                0%, 20%, 100% { 
+                    transform: translateY(0); 
+                    border-color: rgba(255, 255, 255, 0.1) !important; 
+                    background: rgba(255, 255, 255, 0.05) !important; 
+                }
+                10% { 
+                    transform: translateY(-8px); 
+                    border-color: var(--accent-olive) !important; 
+                    background: rgba(255, 255, 255, 0.15) !important;
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                }
+            }
+
+            .resource-tile {
+                animation: staggeredHover 6s infinite;
+            }
+
+            @for ($i = 1; $i <= 20; $i++)
+                .resource-tile:nth-child({{ $i }}) {
+                    animation-delay: {{ ($i - 1) * 0.2 }}s;
+                }
+            @endfor
+
             .info-hub i {
                 color: white !important;
             }
