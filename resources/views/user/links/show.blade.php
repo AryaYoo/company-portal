@@ -29,10 +29,24 @@
                             @if($link->banner_image)
                                 <div class="position-relative bg-light" style="height: 140px;">
                                     <img src="{{ asset('storage/' . $link->banner_image) }}" class="w-100 h-100 object-fit-cover" alt="Banner">
+                                    <div class="position-absolute top-0 start-0 p-3 d-flex flex-wrap gap-1" style="z-index: 3;">
+                                        @foreach($link->units as $unit)
+                                            <span class="px-2 py-1 rounded-pill text-white fw-bold shadow-sm" style="background-color: {{ $unit->color }} !important; font-size: 0.6rem; letter-spacing: 0.5px;">
+                                                {{ $unit->name }}
+                                            </span>
+                                        @endforeach
+                                    </div>
                                 </div>
                             @else
-                                <div class="bg-light d-flex align-items-center justify-content-center" style="height: 100px;">
+                                <div class="bg-light d-flex align-items-center justify-content-center position-relative" style="height: 100px;">
                                     <i class="bi bi-image text-muted opacity-25 fs-1"></i>
+                                    <div class="position-absolute top-0 start-0 p-3 d-flex flex-wrap gap-1" style="z-index: 3;">
+                                        @foreach($link->units as $unit)
+                                            <span class="px-2 py-1 rounded-pill text-white fw-bold shadow-sm" style="background-color: {{ $unit->color }} !important; font-size: 0.6rem; letter-spacing: 0.5px;">
+                                                {{ $unit->name }}
+                                            </span>
+                                        @endforeach
+                                    </div>
                                 </div>
                             @endif
                             
@@ -51,13 +65,6 @@
                                     @endif
                                     <div class="min-w-0 {{ $link->banner_image ? '' : 'mt-2' }}">
                                         <h5 class="fw-bold text-dark mb-0 line-clamp-2">{{ $link->title }}</h5>
-                                        <div class="d-flex flex-wrap gap-1 mt-1">
-                                            @foreach($link->units as $unit)
-                                                <span class="px-2 py-0 rounded-pill text-white small" style="background-color: {{ $unit->color }} !important; font-size: 0.65rem;">
-                                                    {{ $unit->name }}
-                                                </span>
-                                            @endforeach
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="text-muted small mb-0">
