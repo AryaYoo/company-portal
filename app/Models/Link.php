@@ -10,7 +10,7 @@ class Link extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'title', 'description', 'url', 'cover_image', 'is_active', 'is_public', 'order'];
+    protected $fillable = ['category_id', 'title', 'description', 'url', 'cover_image', 'banner_image', 'is_active', 'is_public', 'order'];
 
     protected $casts = [
         'is_active' => 'boolean',

@@ -60,19 +60,28 @@
 
                         <div class="row">
                             <div class="col-md-6 mb-4">
-                                <label for="cover_image" class="form-label fw-semibold text-dark">Cover Image</label>
-                                <div class="input-group">
-                                    <input type="file" class="form-control bg-light" id="cover_image" name="cover_image" accept="image/*">
-                                </div>
-                                <div class="form-text">Max 2MB (JPG, PNG, GIF). Optional.</div>
+                                <label for="cover_image" class="form-label fw-semibold text-dark">Icon / Logo</label>
+                                <input type="file" class="form-control bg-light" id="cover_image" name="cover_image" accept="image/*">
+                                <div class="form-text text-muted">Small square image recommended.</div>
                                 @error('cover_image')
                                     <div class="text-danger small mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-4">
+                                <label for="banner_image" class="form-label fw-semibold text-dark">Banner Image</label>
+                                <input type="file" class="form-control bg-light" id="banner_image" name="banner_image" accept="image/*">
+                                <div class="form-text text-muted">Large landscape image.</div>
+                                @error('banner_image')
+                                    <div class="text-danger small mt-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
                                 <label for="order" class="form-label fw-semibold text-dark">Display Order</label>
                                 <input type="number" class="form-control bg-light" id="order" name="order" value="{{ old('order', 0) }}">
-                                <div class="form-text">Lower values display first.</div>
+                                <div class="form-text text-muted">Lower values display first.</div>
                             </div>
                         </div>
 

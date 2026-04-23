@@ -24,19 +24,37 @@
         <div class="row g-4">
             @foreach($links as $link)
                 <div class="col-md-6 col-lg-4">
-                    <a href="{{ $link->url }}" target="_blank" class="text-decoration-none">
-                        <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden hover-lift bg-light">
-                            <div class="card-body p-4 d-flex align-items-center">
-                                @if($link->cover_image)
-                                    <img src="{{ asset('storage/' . $link->cover_image) }}" class="rounded shadow-sm me-3 flex-shrink-0" alt="{{ $link->title }}" style="width: 60px; height: 60px; object-fit: cover;">
-                                @else
-                                    <div class="bg-primary bg-opacity-10 text-primary rounded d-flex align-items-center justify-content-center me-3 shadow-sm flex-shrink-0" style="width: 60px; height: 60px;">
-                                        <i class="bi bi-link-45deg fs-2"></i>
+                    <a href="{{ $link->url }}" target="_blank" class="text-decoration-none h-100 d-block">
+                        <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden hover-lift bg-white">
+                            @if($link->banner_image)
+                                <div class="position-relative bg-light" style="height: 140px;">
+                                    <img src="{{ asset('storage/' . $link->banner_image) }}" class="w-100 h-100 object-fit-cover" alt="Banner">
+                                </div>
+                            @else
+                                <div class="bg-light d-flex align-items-center justify-content-center" style="height: 100px;">
+                                    <i class="bi bi-image text-muted opacity-25 fs-1"></i>
+                                </div>
+                            @endif
+                            
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-start mb-3">
+                                    @if($link->cover_image)
+                                        <div class="bg-white p-1 rounded shadow-sm me-3 flex-shrink-0" style="margin-top: -35px; z-index: 2; position: relative;">
+                                            <img src="{{ asset('storage/' . $link->cover_image) }}" class="rounded shadow-sm" alt="{{ $link->title }}" style="width: 55px; height: 55px; object-fit: cover;">
+                                        </div>
+                                    @else
+                                        <div class="bg-white p-1 rounded shadow-sm me-3 flex-shrink-0" style="margin-top: -35px; z-index: 2; position: relative;">
+                                            <div class="bg-primary bg-opacity-10 text-primary rounded d-flex align-items-center justify-content-center shadow-sm" style="width: 55px; height: 55px;">
+                                                <i class="bi bi-link-45deg fs-3"></i>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    <div class="min-w-0 {{ $link->banner_image ? '' : 'mt-2' }}">
+                                        <h5 class="fw-bold text-dark mb-0 line-clamp-2">{{ $link->title }}</h5>
                                     </div>
-                                @endif
-                                <div class="min-w-0">
-                                    <h5 class="fw-bold text-dark mb-1 text-truncate">{{ $link->title }}</h5>
-                                    <p class="text-muted small mb-0 text-truncate">{{ $link->description ? Str::limit($link->description, 60) : 'Buka Tautan' }}</p>
+                                </div>
+                                <div class="text-muted small mb-0">
+                                    {!! $link->description ? nl2br(e(Str::limit($link->description, 160))) : '<span class="fst-italic">Buka Tautan</span>' !!}
                                 </div>
                             </div>
                         </div>
@@ -62,7 +80,13 @@
     }
     .hover-lift:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    }
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
     }
 </style>
 @endpush

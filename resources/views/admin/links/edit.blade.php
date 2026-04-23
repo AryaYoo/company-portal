@@ -61,11 +61,9 @@
 
                         <div class="row align-items-center">
                             <div class="col-md-6 mb-4">
-                                <label for="cover_image" class="form-label fw-semibold text-dark">Cover Image</label>
-                                <div class="input-group">
-                                    <input type="file" class="form-control bg-light" id="cover_image" name="cover_image" accept="image/*">
-                                </div>
-                                <div class="form-text">Max 2MB. Leave blank to keep current image.</div>
+                                <label for="cover_image" class="form-label fw-semibold text-dark">Icon / Logo</label>
+                                <input type="file" class="form-control bg-light" id="cover_image" name="cover_image" accept="image/*">
+                                <div class="form-text text-muted">Small square image recommended.</div>
                                 @error('cover_image')
                                     <div class="text-danger small mt-1">{{ $message }}</div>
                                 @enderror
@@ -73,16 +71,33 @@
                             <div class="col-md-6 mb-4">
                                 @if($link->cover_image)
                                     <div class="mt-2">
-                                        <p class="mb-1 small fw-semibold text-muted">Current Image:</p>
-                                        <img src="{{ asset('storage/' . $link->cover_image) }}" alt="Preview" class="rounded object-fit-cover shadow-sm border" style="height: 60px; width: 60px;">
-                                    </div>
-                                @else
-                                    <div class="mt-2">
-                                        <span class="text-muted small border px-2 py-1 rounded bg-light">No Image</span>
+                                        <p class="mb-1 small fw-semibold text-muted">Current Icon:</p>
+                                        <img src="{{ asset('storage/' . $link->cover_image) }}" alt="Preview" class="rounded object-fit-cover shadow-sm border" style="height: 50px; width: 50px;">
                                     </div>
                                 @endif
                             </div>
-                            
+                        </div>
+
+                        <div class="row align-items-center">
+                            <div class="col-md-6 mb-4">
+                                <label for="banner_image" class="form-label fw-semibold text-dark">Banner Image</label>
+                                <input type="file" class="form-control bg-light" id="banner_image" name="banner_image" accept="image/*">
+                                <div class="form-text text-muted">Large landscape image.</div>
+                                @error('banner_image')
+                                    <div class="text-danger small mt-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                @if($link->banner_image)
+                                    <div class="mt-2">
+                                        <p class="mb-1 small fw-semibold text-muted">Current Banner:</p>
+                                        <img src="{{ asset('storage/' . $link->banner_image) }}" alt="Preview" class="rounded object-fit-cover shadow-sm border" style="height: 50px; width: 100px;">
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-6 mb-4">
                                 <label for="order" class="form-label fw-semibold text-dark">Display Order</label>
                                 <input type="number" class="form-control bg-light" id="order" name="order" value="{{ old('order', $link->order) }}">

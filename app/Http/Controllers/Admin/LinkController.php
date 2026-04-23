@@ -29,13 +29,18 @@ class LinkController extends Controller
             'description' => 'nullable|string',
             'url' => 'required|url',
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'order' => 'nullable|integer',
             'is_active' => 'boolean',
             'is_public' => 'boolean',
         ]);
 
         if ($request->hasFile('cover_image')) {
-            $validated['cover_image'] = $request->file('cover_image')->store('links', 'public');
+            $validated['cover_image'] = $request->file('cover_image')->store('links/icons', 'public');
+        }
+
+        if ($request->hasFile('banner_image')) {
+            $validated['banner_image'] = $request->file('banner_image')->store('links/banners', 'public');
         }
 
         $validated['is_active'] = $request->has('is_active');
@@ -60,6 +65,7 @@ class LinkController extends Controller
             'description' => 'nullable|string',
             'url' => 'required|url',
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'order' => 'nullable|integer',
             'is_active' => 'boolean',
             'is_public' => 'boolean',
@@ -70,7 +76,15 @@ class LinkController extends Controller
             if ($link->cover_image) {
                 \Storage::disk('public')->delete($link->cover_image);
             }
-            $validated['cover_image'] = $request->file('cover_image')->store('links', 'public');
+            $validated['cover_image'] = $request->file('cover_image')->store('links/icons', 'public');
+        }
+
+        if ($request->hasFile('banner_image')) {
+            // Delete old image if exists
+            if ($link->banner_image) {
+                \Storage::disk('public')->delete($link->banner_image);
+            }
+            $validated['banner_image'] = $request->file('banner_image')->store('links/banners', 'public');
         }
 
         $validated['is_active'] = $request->has('is_active');
@@ -85,6 +99,9 @@ class LinkController extends Controller
     {
         if ($link->cover_image) {
             \Storage::disk('public')->delete($link->cover_image);
+        }
+        if ($link->banner_image) {
+            \Storage::disk('public')->delete($link->banner_image);
         }
         $link->delete();
         return redirect()->route('admin.links.index')->with('success', 'Link berhasil dihapus');
